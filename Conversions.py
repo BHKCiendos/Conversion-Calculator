@@ -4,7 +4,7 @@ import streamlit as st
 # Load conversion factors from JSON
 @st.cache_data
 def load_factors():
-    with open("Conversions/Factor_Table.json", "r") as f:
+    with open("Factor_Table.json", "r") as f:
         return json.load(f)
 
 data = load_factors()
