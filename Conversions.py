@@ -30,12 +30,12 @@ year = st.selectbox(
 factor = data[emission_type][year]
 
 if factor is None:
-    st.warning("The conversion factor for this year is not populated.")
+    st.warning("⚠️ The conversion factor for this year is not populated.")
 else:
     kwh = st.number_input(
         "Enter energy consumption (kWh)",
         min_value=0.0,
-        step=1000
+        step=1000.0
     )
 
     if st.button("Calculate CO₂ Emissions"):
