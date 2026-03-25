@@ -2,10 +2,13 @@ import json
 import streamlit as st
 
 # Load conversion factors from JSON
+
+
 @st.cache_data
 def load_factors():
     with open("Factor_Table.json", "r") as f:
         return json.load(f)
+
 
 data = load_factors()
 
@@ -27,18 +30,19 @@ year = st.selectbox(
 factor = data[emission_type][year]
 
 if factor is None:
-    st.warning("⚠️ The conversion factor for this year is not populated.")
+    st.warning("The conversion factor for this year is not populated.")
 else:
     kwh = st.number_input(
         "Enter energy consumption (kWh)",
         min_value=0.0,
-        step=0.1
+        step=1000
     )
 
     if st.button("Calculate CO₂ Emissions"):
         co2 = kwh * factor
 
-        st.success(f"### Result\n**{kwh} kWh** of **{emission_type.capitalize()}** in **{year}** emits: {co2:.2f} tonnes CO₂")
+        st.success(
+            f"### Result\n**{kwh} kWh** of **{emission_type.capitalize()}** in **{year}** emits: {co2:.2f} tonnes CO₂")
 
 st.header("Gigajoules to kWh Converter")
 
